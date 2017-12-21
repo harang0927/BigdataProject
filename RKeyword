@@ -1,0 +1,47 @@
+#기업별 리뷰 크롤링 문서와 DISC 키워드간의 코사인비교
+library(tm)
+library(KoNLP)
+library(stringr)
+library(lsa)
+useSejongDic()
+rm(list=ls())
+src_dir <- c("C:/CompanyReviewList")
+src_file <- list.files(src_dir)
+src_file_cnt <- length(src_file)
+DISC<-list()
+for(i in 1:src_file_cnt) {
+   file <- read.table(
+                paste(src_dir, "/", src_file[i], sep=""), 
+                sep=",", header=T, stringsAsFactors = F)
+   
+   file <-gsub("\\d","",file)
+   file <-gsub("\\,","",file)
+   file <-gsub("\\(","",file)
+   file <-gsub("\\)","",file)
+   file <-gsub("[A-Za-z]","",file)
+   file <-gsub("\\?","",file)
+   file <-gsub("\\.","",file)
+   file <-gsub("\\!","",file)
+   
+   file <- Corpus(VectorSource(file))
+   dd <- read.csv("C:/finalDic/D.csv", stringsAsFactors=F)
+   di <- read.csv("C:/finalDic/I.csv", stringsAsFactors=F)
+   ds <- read.csv("C:/finalDic/S.csv", stringsAsFactors=F)
+   dc <- read.csv("C:/finalDic/C.csv", stringsAsFactors=F)
+      
+   all <- c(file, dd, di, ds, dc)
+   corpus <- Corpus(VectorSource(all))
+   tdm <- TermDocumentMatrix(corpus)
+   m<-as.matrix(tdm)
+     
+   DCosine <- cosine(m[,1], m[,4])* 0.8 # D
+   ICosine <- cosine(m[,1], m[,5])* 0.7 # I
+   SCosine <- cosine(m[,1], m[,6]) # S
+   CCosine <- cosine(m[,1], m[,7]) # C
+      
+   bind <- c(src_file[i],DCosine,ICosine,SCosine,CCosine)
+   DISC <- rbind(DISC, bind)
+ 
+}
+DISC
+write.csv(DISC,"C:/bind.csv")
