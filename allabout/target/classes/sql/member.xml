@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="Member">
+	<!--  resultMap 지정-->
+	<resultMap type="member" id="memberSelectMap">
+	    <result property="memId" column="mem_id" />
+	    <result property="memName" column="mem_name" />
+	    <result property="memPw" column="mem_pw" />
+	    <result property="memGender" column="mem_gender" />
+	    <result property="memEmail" column="mem_email" />		
+		<result property="memRole" column="mem_role" />
+	</resultMap>
+	
+	<insert id="registerMember" parameterType="member">
+		INSERT 
+		INTO member 
+		(mem_name,mem_id,mem_pw,mem_email,mem_gender)
+		VALUES(#{memName},#{memId},#{memPw},#{memEmail}, #{memGender})
+	</insert>
+	
+	<select id="memIdCheck" parameterType="string" resultType="string">
+		SELECT 
+		mem_id
+		FROM member
+		WHERE mem_id=#{value}
+	</select>
+	
+	<select id="login" parameterType="member" resultMap="memberSelectMap">
+		SELECT 
+		mem_name,mem_id,mem_pw,mem_email,mem_gender
+		FROM member
+		WHERE mem_id=#{memId} AND mem_pw=#{memPw}
+	</select>
+	
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM member
+		WHERE mem_id=#{value}
+	</delete>
+	
+	<update id="updateMember" parameterType="member">
+		UPDATE member SET mem_pw=#{memPw}, mem_email=#{memEmail}
+		WHERE mem_id=#{memId}
+	</update>
+	
+	<select id="showMyInfoById" parameterType="string" resultMap="memberSelectMap">
+		SELECT mem_name,mem_id,mem_pw,mem_email,mem_gender, mem_role
+		FROM member 
+		WHERE mem_id=#{memId}
+	</select>
+	<resultMap type="memberAnal" id="memberAnalSelect">
+	    <result property="memId" column="mem_id" />
+	    <result property="dominance" column="dominance" />
+	    <result property="influence" column="influence" />
+	    <result property="steadiness" column="steadiness" />
+	    <result property="conscientious" column="conscientious" />		
+	</resultMap>
+	<insert id="insertDISC" parameterType="memberAnal">
+		INSERT 
+		INTO member_anal 
+		(mem_id,dominance,influence,steadiness,conscientious)
+		VALUES(#{memId},#{dominance},#{influence},#{steadiness}, #{conscientious})
+	</insert>
+	<select id="resultDISC" parameterType="string" resultMap="memberAnalSelect">
+		SELECT
+		mem_id,dominance,influence,steadiness,conscientious
+		FROM member_anal
+		WHERE mem_id=#{value}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Company">
+
+	<resultMap type="company" id="CompanyListRM">
+		<result property="comLogo" column="com_logo"/>
+		<result property="comName" column="com_name" />
+		<result property="comIndustry" column="com_industry" />
+	</resultMap>
+	
+	<resultMap type="company" id="CompanySelect">
+		<result property="comLogo" column="com_logo"/>
+		<result property="comName" column="com_name" />
+		<result property="comIndustry" column="com_industry" />
+		<result property="comDescript" column="com_descript" />
+		<result property="comAddr" column="com_addr" />
+	</resultMap>
+	<select id="selectCompany" parameterType="string" resultMap="CompanySelect">
+		SELECT com_name, com_logo, com_addr, com_descript, com_industry
+		FROM company 
+		WHERE com_name=#{comName}
+	</select>
+	<resultMap type="companyIncome" id="CompanyIncomeSelect">
+		<result property="comName" column="com_name" />
+		<result property="income16" column="income16"/>
+		<result property="income15" column="income15" />
+		<result property="income14" column="income14" />
+		<result property="profit16" column="profit16" />
+		<result property="profit15" column="profit15" />
+		<result property="profit14" column="profit14" />
+	</resultMap>
+	<select id="selectCompanyIncome" parameterType="string" resultMap="CompanyIncomeSelect">
+		SELECT com_name,income16,income15,income14,
+			   profit16,profit15,profit14
+		FROM company_income
+		WHERE com_name=#{comName}
+	</select>
+	<resultMap type="companyEmpl" id="CompanyEmplSelect">
+		<result property="comName" column="com_name" />
+		<result property="annualSalary" column="annual_salary"/>
+		<result property="resignationRate" column="resignation_rate" />
+		<result property="maleNum" column="male_num" />
+		<result property="femaleNum" column="female_num" />
+		<result property="femaleRegular" column="female_regular" />
+		<result property="femaleTemporary" column="female_temporary" />
+		<result property="maleRegular" column="male_regular" />
+		<result property="maleTemporary" column="male_temporary" />
+		<result property="mworkYears" column="mwork_years" />
+		<result property="fworkYears" column="fwork_years" />
+	</resultMap>
+	<select id="selectCompanyEmpl" parameterType="string" resultMap="CompanyEmplSelect">
+	
+		SELECT com_name,annual_salary,resignation_rate,male_num,female_num,
+			   female_regular,female_temporary,male_regular,male_temporary,
+			   mwork_years,fwork_years
+		FROM company_employee  
+		WHERE com_name=#{comName}
+
+	</select>
+	
+	<resultMap type="companyAnal" id="CompanyAnalSelect">
+		<result property="comName" column="com_name" />
+		<result property="dominance" column="dominance"/>
+		<result property="influence" column="influence" />
+		<result property="steadiness" column="steadiness" />
+		<result property="conscientious" column="conscientious"/>
+	</resultMap>
+	<select id="selectCompanyAnal" parameterType="string" resultMap="CompanyAnalSelect">
+		SELECT com_name, dominance,influence,steadiness,conscientious
+		FROM company_anal
+		WHERE com_name=#{comName}	
+	</select>
+	
+	<!-- <select id="showCompanyByComName" parameterType="string" resultMap="CompanyAllRM">
+		SELECT c.com_name, c.com_logo, c.com_addr, c.com_descript, c.com_industry,
+			   ce.annual_salary,ce.resignation_rate,ce.male_num,ce.female_num,
+			   ce.female_regular,ce.female_temporary,ce.male_regular,ce.male_temporary,
+			   ce.mwork_years,ce.fwork_years,
+			   ca.dominance,ca.influence,ca.steadiness,ca.conscientious,
+			   cincom.income16,cincom.income15,cincom.income16,
+			   cincom.profit16,cincom.profit15,cincom.profit14
+		FROM company c, company_employee ce, company_anal ca, company_income cincom
+		WHERE c.com_name = ce.com_name and c.com_name = ca.com_name and c.com_name = cincom.com_name 
+		AND c.com_name=#{comName}
+	
+	</select> -->
+	
+	<select id="companyList" resultMap="CompanyListRM" parameterType="int">
+		SELECT com_logo, com_name, com_industry
+		FROM
+			(SELECT com_logo, com_name, com_industry, CEIL(rownum/15) as page 
+			FROM
+			(SELECT com_logo, com_name, com_industry
+			 FROM company
+			 order by com_name))
+		WHERE page=#{value}
+	</select>
+	
+	<select id="companyTotalCount" resultType="int">
+      SELECT COUNT(-1) FROM company
+    </select>
+	
+	<select id="companySearchList" resultMap="CompanyListRM" parameterType="string">
+			 SELECT com_logo, com_name, com_industry
+			 FROM company
+    	     where upper(com_name) LIKE '%'|| upper(#{comName}) ||'%'
+    	 	 ORDER BY com_name
+    </select>
+    
+    <resultMap type="companyInterview" id="CompanyInterviewRM">
+    	<result property="comName" column="com_name" />
+    	<result property="interviewDate" column="interview_date"/>
+		<result property="interviewLevel" column="interview_level"/>
+		<result property="interviewRole" column="interview_role"/>
+		<result property="interviewTopic" column="interview_topic"/>
+		<result property="interviewQuestion" column="interview_question"/>
+		<result property="interviewAnswer" column="interview_answer"/>
+		<result property="interviewNo" column="interview_no"/>
+	</resultMap>
+	
+	<select id="companyInterviewList" resultMap="CompanyInterviewRM" parameterType="string">
+		SELECT interview_date,interview_level, interview_role,
+			   interview_topic,interview_question,interview_answer,
+			   interview_no
+		FROM company_interview
+		WHERE com_name=#{comName}
+		order by interview_no
+	</select>
+
+	
+</mapper>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
+
+<title>All About company</title>
+
+<link rel="shortcut icon" href="assets/images/top-logo.png">
+
+<link rel="stylesheet" media="screen"
+	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+<!-- Custom styles for our template -->
+<link rel="stylesheet" href="assets/css/bootstrap-theme.css"
+	media="screen">
+<link rel="stylesheet" href="assets/css/main.css">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+<style>
+p{
+text-align:center;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="../html/home.jsp">
+				<img src="assets/images/logo.png" width=230px height=40px
+					alt="Progressus HTML5 template" ></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="../html/home.jsp">홈</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">개인성향분석<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="../html/disc.html">DISC란?</a></li>
+							<li><a href="../html/personal.jsp">검사하기</a></li>
+							<li><a href="../html/discresult.jsp">결과보기</a></li>
+						</ul></li>
+					<li><a href="../html/list.jsp">About 기업</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">문의사항<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="../html/faq.html">FAQ</a></li>
+							<li><a href="../html/table.jsp">질문게시판</a></li>
+						</ul></li>
+					<c:choose>
+					<c:when test="${sessionScope.mvo != null}">
+						<li><a href="/html/mypage.jsp">마이페이지</a></li>
+						<li class="active"><a class="btn" href="../myapp/logout.do"
+							id="sign_in_btn">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+							<li class="active"><a class="btn" href="signin.jsp"
+							id="sign_in_btn">로그인 / 회원가입</a></li>
+					</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+	<!-- /.navbar -->
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+
+	<div class="container2" style="padding: 10px; padding-right: 20px;">
+		<div class="col-sm-2 sidenav">
+			<div class="section1">
+
+				<img src="assets/images/삼성전자.png" width=250px height=100px
+					alt="Progressus HTML5 template">
+
+			</div>
+		</div>
+
+	</div>
+
+	
+	<div>
+	<br>
+<span><strong style="font-size: 45px;">삼성 SDI</strong>&nbsp;&nbsp;&nbsp;
+ <span>제조업</span>
+ </span>
+	</div><hr>
+	<div>
+		<ul class="nav nav-pills" style=padding-left:50px;>
+			<li ><a href="common.html">일반정보</a></li>
+			<li><a href="worker.html">직원현황</a></li>
+			<li ><a href="tendency.html">기업성향</a></li>
+			<li class="active"><a href="interview.html">면접후기</a></li>
+		</ul>
+		</div>
+
+	
+			<div style=padding-left:60px>
+			<h2>
+				<strong>목록</strong>
+			</h2>
+			<br>
+			<div class="panel-group" id="accordion"  style="padding-right:120px">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapse1">원하는 기업?추가하고 싶은? 기업이 있으면 어떻게 하나요?</a>
+						</h4>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse in">
+						<div class="panel-body">~~~이렇게 하세요</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapse2">1~는 어떻게 하나요?</a>
+						</h4>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse">
+						<div class="panel-body">~~이렇게 하세요</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapse3">3. ~는 어떻게 하나요?</a>
+						</h4>
+					</div>
+					<div id="collapse3" class="panel-collapse collapse">
+						<div class="panel-body">이렇게 하세요~~!</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapse4">4. ~는 어떻게 하나요?</a>
+						</h4>
+					</div>
+					<div id="collapse4" class="panel-collapse collapse">
+						<div class="panel-body">이렇게 하세요~~!</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	
+
+ <footer>
+	<div class="footer2">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-6 widget">
+					<div class="widget-body">
+						<p class="simplenav">
+							<a href="home.html">홈</a> | <a href="personal.html">개인성향분석</a> |
+							<a href="list.html">기업목록</a> | <a href="faq.html">문의사항</a> | <a
+								href="mypage.html">마이페이지</a>
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 widget">
+					<div class="widget-body">
+						<p class="text-right">
+							Copyright &copy; 2017, Designed by <a
+								href="http://gettemplate.com/" rel="designer">All about</a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+			<!-- /row of widgets -->
+		</div>
+	</div>
+	</footer>
+
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script
+		src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="assets/js/headroom.min.js"></script>
+	<script src="assets/js/jQuery.headroom.min.js"></script>
+	<script src="assets/js/template.js"></script>
+</body>
+</html>
