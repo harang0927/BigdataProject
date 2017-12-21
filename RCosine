@@ -1,0 +1,39 @@
+# 코사인 유사도 완성
+library(tm)
+library(KoNLP)
+library(stringr)
+library(lsa)
+useSejongDic()
+setwd("C:/finalDic")
+file <-read.csv("C:/CompanyReviewList/카카오.csv", stringsAsFactors=F)
+
+file <-gsub("\\d","",file)
+file <-gsub("\\,","",file)
+file <-gsub("\\(","",file)
+file <-gsub("\\)","",file)
+file <-gsub("[A-Za-z]","",file)
+file <-gsub("\\?","",file)
+file <-gsub("\\.","",file)
+file <-gsub("\\!","",file)
+
+file
+file <- Corpus(VectorSource(file))
+dd <- read.csv("D.csv", stringsAsFactors=F)
+di <- read.csv("I.csv", stringsAsFactors=F)
+ds <- read.csv("S.csv", stringsAsFactors=F)
+dc <- read.csv("C.csv", stringsAsFactors=F)
+
+all <- c(file, dd, di, ds, dc)
+corpus <- Corpus(VectorSource(all))
+corpus
+tdm <- TermDocumentMatrix(corpus)
+tdm
+m<-as.matrix(tdm)
+View(m)
+
+cosine(m[,1], m[,4]) # D
+cosine(m[,1], m[,5]) # I
+cosine(m[,1], m[,6]) # S
+cosine(m[,1], m[,7]) # C
+
+
